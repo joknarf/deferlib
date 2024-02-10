@@ -1,4 +1,4 @@
-# 
+#
 # returns <value> if file exists
 # else returns <default>
 # without <default> returns []
@@ -16,9 +16,10 @@ Puppet::Functions.create_function(:onlyif_file) do
     optional_param 'Any', :default
   end
   def onlyif_file(file, value, default = [])
-    if File.exists?(file)
-    then value
-    else default
+    if File.exist?(file)
+      value
+    else
+      default
     end
   end
 end

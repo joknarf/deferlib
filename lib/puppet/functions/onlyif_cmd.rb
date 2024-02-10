@@ -1,6 +1,6 @@
-# 
+#
 # returns <value> if command returns 0
-# else returns <default> 
+# else returns <default>
 # without <default>, returns []
 #
 # to be called as Deferred type to be run on client
@@ -18,8 +18,9 @@ Puppet::Functions.create_function(:onlyif_cmd) do
   end
   def onlyif_cmd(cmd, value, default = [])
     if system(cmd)
-    then value
-    else default
+      value
+    else
+      default
     end
   end
 end

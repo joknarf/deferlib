@@ -1,4 +1,4 @@
-# 
+#
 # returns value if file does not exists
 # to be called as Deferred type to be run on client
 #
@@ -15,8 +15,9 @@ Puppet::Functions.create_function(:unless_cmd) do
   end
   def unless_cmd(cmd, value, default = [])
     if system(cmd)
-    then default
-    else value
+      default
+    else
+      value
     end
   end
 end

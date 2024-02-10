@@ -1,6 +1,6 @@
-# 
+#
 # returns <cmd> output
-# if <cmd> output is '' return default 
+# if <cmd> output is '' return default
 # if <default> not passed, <default> is []
 # to be called as Deferred type to be run on client
 # to be used on resource parameter value
@@ -15,10 +15,11 @@ Puppet::Functions.create_function(:agent_cmd) do
     optional_param 'Any', :default
   end
   def agent_cmd(cmd, default = [])
-    out = %x{#{cmd}}
+    out = `#{cmd}`
     if out == ''
-    then default
-    else out.chomp
+      default
+    else
+      out.chomp
     end
   end
 end

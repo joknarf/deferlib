@@ -1,5 +1,5 @@
-# 
-# returns value if file does not exists
+#
+# returns value if file does not exist
 # to be called as Deferred type to be run on client
 #
 # Example:
@@ -14,9 +14,10 @@ Puppet::Functions.create_function(:unless_file) do
     optional_param 'Any', :default
   end
   def unless_file(file, value, default = [])
-    if File.exists?(file)
-    then default
-    else value
+    if File.exist?(file)
+      default
+    else
+      value
     end
   end
 end
