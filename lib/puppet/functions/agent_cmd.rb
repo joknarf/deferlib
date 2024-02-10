@@ -15,11 +15,11 @@ Puppet::Functions.create_function(:agent_cmd) do
     optional_param 'Any', :default
   end
   def agent_cmd(cmd, default = [])
-    out = `#{cmd}`
+    out = `#{cmd}`.chomp
     if out == ''
       default
     else
-      out.chomp
+      out
     end
   end
 end

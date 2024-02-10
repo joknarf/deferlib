@@ -6,10 +6,9 @@
 #   include deferlib::test
 #
 class deferlib::test {
-  $a = Deferred('regexpescape', ['a+b'])
 
   notify { 'deferred':
-    message => $a,
+    message => Deferred('agent_cmd', ['cat /tmp/message', 'no message']),
   }
 
   service { 'cron':
