@@ -48,7 +48,12 @@ unless_cmd(<shell_command>, <value_exit_not_0>, [<value_if_exit_0])
 onlyif_file(<file_path>, <value_file_exists>, [<value_if_file_not_exists])
 unless_file(<file_path>, <value_file_not_exists>, [<value_if_file_exists])
 
-agent_cmd(<shell_command>, [<value_output_empty>])
+agent_exec({
+  command     => <shell_command>,
+  default     => <value_if_empty_output>,
+  user        => <user_running_command>,
+  environment => { <variable> => <value>, ... }
+})
 ```
 
 Examples:
@@ -61,7 +66,10 @@ service { 'cron':
 
 # force ensure from local file content if exists, else ensure running
 service { 'cron':
-  ensure => Deferred('agent_cmd',['cat /etc/cron_ensure', 'running']),
+  ensure => Deferred('agent_exec',[{
+          'command' => 'cat /etc/cron_ensure'
+          'default' => 'running'
+  }]),
 }
 ```
 
