@@ -36,7 +36,7 @@ class deferlib::test {
     #         else    => 'running',
     #}]),
     ensure => 'running',
-    noop   => Deferred('deferlib::if_file', ['/tmp/flag', true]),
+    noop   => Deferred('deferlib::if_file', ['/tmp/flag', true, false]),
     #noop   => Deferred('deferlib::unless_file', ['/tmp/flag', false, true]),
   }
 }
