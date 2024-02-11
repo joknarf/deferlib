@@ -190,7 +190,7 @@ options['environment'] : {
 service { 'cron':
   ensure => Deferred('def_exec',[{
           'command' => 'cat /etc/cron_ensure',
-          'else'    => 'running'
+          'else'    => 'running',
   }]),
 }
 # use script cron_ensure from puppet module files
