@@ -23,7 +23,6 @@ Puppet::Functions.create_function(:'deferlib::cmd_') do
   def cmd(options = {})
     default = []
     default = options['else'] if options.key?('else')
-    
     unless options.key?('command')
       return default
     end
