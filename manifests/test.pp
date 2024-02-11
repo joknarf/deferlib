@@ -7,7 +7,7 @@
 #
 class deferlib::test {
   notify { 'deferred':
-    message => Deferred('agent_exec', [{
+    message => Deferred('def_exec', [{
           'command'     => 'cat /tmp/message;id',
           'else'        => 'no message',
           'user'        => 'joknarf',
@@ -15,15 +15,21 @@ class deferlib::test {
     }]),
   }
 
+  notify { 'script from module':
+    message => Deferred('def_exec', [{
+          'command' => file("${module_name}/myscript"),
+    }]),
+  }
+
   service { 'cron':
-    #ensure => Deferred('unless_file', ['/tmp/maintenance', 'running']),
-    #ensure => Deferred('onlyif_file', ['/tmp/production', 'running']),
-    #ensure => Deferred('onlyif_cmd', ['false', 'running']),
-    #ensure => Deferred('agent_exec', [{
+    #ensure => Deferred('def_unless_file', ['/tmp/maintenance', 'running']),
+    #ensure => Deferred('def_if_file', ['/tmp/production', 'running']),
+    #ensure => Deferred('def_if_cmd', ['false', 'running']),
+    #ensure => Deferred('def_exec', [{
     #         command => 'cat /tmp/cron_local_ensure',
     #         else    => 'running',
     #}]),
     ensure => 'running',
-    noop   => Deferred('unless_file', ['/tmp/flag', false, true]),
+    noop   => Deferred('def_unless_file', ['/tmp/flag', false, true]),
   }
 }

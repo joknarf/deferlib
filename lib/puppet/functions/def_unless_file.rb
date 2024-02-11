@@ -4,16 +4,16 @@
 #
 # Example:
 # service { 'cron':
-#    ensure => Deferred('unless_file', ['/tmp/maintenance', 'running']),
+#    ensure => Deferred('def_unless_file', ['/tmp/maintenance', 'running']),
 # }
 #
-Puppet::Functions.create_function(:unless_file) do
-  dispatch :unless_file do
+Puppet::Functions.create_function(:def_unless_file) do
+  dispatch :def_unless_file do
     param 'String', :file
     param 'Any', :value
     optional_param 'Any', :default
   end
-  def unless_file(file, value, default = [])
+  def def_unless_file(file, value, default = [])
     if File.exist?(file)
       default
     else

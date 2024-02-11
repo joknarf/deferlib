@@ -7,7 +7,7 @@
 # to be used on resource parameter value
 # Example:
 # service { 'cron':
-#    ensure => Deferred('unless_cmd', ['grep maintenance /tmp/status', 'running',{
+#    ensure => Deferred('def_if_cmd', ['! grep maintenance /tmp/status', 'running',{
 #          'else'  => 'stopped'
 #          'user'  => 'foo',
 #          'group' => 'bar',
@@ -15,14 +15,14 @@
 #    }]),
 # }
 #
-Puppet::Functions.create_function(:unless_cmd) do
-  dispatch :unless_cmd do
+Puppet::Functions.create_function(:def_if_cmd) do
+  dispatch :def_if_cmd do
     param 'String', :cmd
     param 'Any', :value
     optional_param 'Hash', :options
   end
 
-  def unless_cmd(cmd, value, options = {})
+  def def_if_cmd(cmd, value, options = {})
     default = []
     default = options['else'] if options.key?('else')
     opts = {}
@@ -31,9 +31,9 @@ Puppet::Functions.create_function(:unless_cmd) do
     opts[:environment] = options['environment'] if options.key?('environment')
     result = Puppet::Util::Execution.execute(cmd, opts)
     if result.exitstatus == 0
-      default
-    else
       value
+    else
+      default
     end
   end
 end

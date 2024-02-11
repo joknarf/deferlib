@@ -7,11 +7,11 @@
     * [Setup requirements](#setup-requirements)
     * [Beginning with deferlib](#beginning-with-deferlib)
 1. [Usage](#usage)
-    * [onlyif_file()](#onlyif_file)
-    * [unless_file()](#unless_file)
-    * [onlyif_cmd()](#onlyif_cmd)
-    * [unless_cmd()](#unless_cmd)
-    * [agent_exec()](#agent_exec)
+    * [def_if_file()](#def_if_file)
+    * [def_unless_file()](#def_unless_file)
+    * [def_if_cmd()](#def_if_cmd)
+    * [def_unless_cmd()](#def_unless_cmd)
+    * [def_exec()](#def_exec)
 
 ## Description
 
@@ -38,7 +38,7 @@ Example:
 # do not restart cron when maintenance flag file exists putting ensure to undef
 # => function to read: unless file /etc/maintenance exists ensure running, (else ensure undef)
 service { 'cron':
-  ensure => Deffered('unless_file', ['/etc/maintenance', 'running']),
+  ensure => Deffered('def_unless_file', ['/etc/maintenance', 'running']),
 }
 ```
 
@@ -46,9 +46,9 @@ service { 'cron':
 
 functions available:
 
-### onlyif_file()
+### def_if_file()
 ```ruby
-onlyif_file(file, value, [default])
+def_if_file(file, value, [default])
 ```
 #### Description:
 returns `value` if `file` exits else returns `default` (default: [])
@@ -65,13 +65,13 @@ default : value returned if file does not exist (default [])
 # stop cron when cron_stop flag file exists
 # => function to read: if file /etc/cron_stop exists ensure stopped else ensure running
 service { 'cron':
-  ensure => Deffered('onlyif_file', ['/etc/cron_stop', 'stopped', 'running']),
+  ensure => Deffered('def_if_file', ['/etc/cron_stop', 'stopped', 'running']),
 }
 ```
 
-### unless_file()
+### def_unless_file()
 ```ruby
-unless_file(file, value, [default])
+def_unless_file(file, value, [default])
 ```
 #### Description:
 returns `value` if `file` does not exits else returns `default` (default: [])
@@ -88,13 +88,13 @@ default : value returned if file exists (default [])
 # do not restart cron when maintenance flag file exists putting ensure to undef ([])
 # => function to read: unless file /etc/maintenance exists ensure running, (else ensure undef)
 service { 'cron':
-  ensure => Deffered('unless_file', ['/etc/maintenance', 'running']),
+  ensure => Deffered('def_unless_file', ['/etc/maintenance', 'running']),
 }
 ```
 
-### onlyif_cmd()
+### def_if_cmd()
 ```ruby
-onlyif_cmd(cmd, value, [options])
+def_if_cmd(cmd, value, [options])
 ```
 #### Description:
 returns `value` if exit code of `cmd` is 0 else returns `options[else]` (default to [])
@@ -119,16 +119,16 @@ options['environment'] : {
 ```puppet
 # ensure cron running if isproduction returns 0
 service { 'cron':
-  ensure => Deferred('onlyif_cmd',['/bin/isproduction', 'running', {
+  ensure => Deferred('def_if_cmd',['/bin/isproduction', 'running', {
           'user'    => 'foo',
           'group'   => 'bar',
   }]),
 }
 ```
 
-### unless_cmd()
+### def_unless_cmd()
 ```ruby
-unless_cmd(cmd, value, [options])
+def_unless_cmd(cmd, value, [options])
 ```
 #### Description:
 returns `value` if exit code of `cmd` is not 0 else returns `options[else]` (default to [])
@@ -154,16 +154,16 @@ options['environment'] : {
 ```puppet
 # ensure cron running unless ismaintenance returns 0
 service { 'cron':
-  ensure => Deferred('unless_cmd',['/bin/ismaintenance', 'running', {
+  ensure => Deferred('def_unless_cmd',['/bin/ismaintenance', 'running', {
           'user'    => 'foo',
           'group'   => 'bar',
   }]),
 }
 ```
 
-### agent_exec()
+### def_exec()
 ```ruby
-agent_exec(options)
+def_exec(options)
 ```
 #### Description:
 returns output of `options[command]` if exit code is 0 else returns `options['else']` (default to [])
@@ -188,14 +188,14 @@ options['environment'] : {
 ```puppet
 # force ensure from local file content if exists, else ensure running
 service { 'cron':
-  ensure => Deferred('agent_exec',[{
+  ensure => Deferred('def_exec',[{
           'command' => 'cat /etc/cron_ensure',
           'else'    => 'running'
   }]),
 }
 # use script cron_ensure from puppet module files
 service { 'cron':
-  ensure => Deferred('agent_exec',[{
+  ensure => Deferred('def_exec',[{
           'command' => file("${module_name}/cron_ensure"),
   }]),  
 }
