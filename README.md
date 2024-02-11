@@ -20,7 +20,6 @@ Control your resources parameters from client side without creating useless fact
 Provides functions library to use to get values for resource parameters
 from files/command executed on agent side (deferred), providing way to control resources
 from agent host local things without creating facts that executes on all servers.
-These function are to declare as Deferred type to be executed on agent side.
 
 ## Setup
 
