@@ -6,7 +6,7 @@
 #
 # Example:
 # service { 'cron':
-#    ensure => Deferred('if_file', ['/etc/production', 'running']),
+#    ensure => Deferred('deferlib::if_file_', ['/etc/production', 'running']),
 # }
 #
 Puppet::Functions.create_function(:'deferlib::if_file_') do

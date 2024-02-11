@@ -21,10 +21,8 @@ class deferlib::test {
     }),
   }
 
-  notify { 'deferlib::cmd':
-    message => deferlib::cmd ({
-        'command' => file("${module_name}/myscript"),
-    }),
+  notify { 'deferlib::if_cmd':
+    message => deferlib::if_cmd(file("${module_name}/myscript"), 'exit ok'),
   }
 
   service { 'cron':

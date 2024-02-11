@@ -7,7 +7,7 @@
 #
 # Example:
 # service { 'cron':
-#   ensure => Deferred('cmd', [{
+#   ensure => Deferred('deferlib::cmd_', [{
 #         command     => 'cat /etc/cron_local_ensure',
 #         else        => 'running',
 #         user        => 'foo',
@@ -23,6 +23,7 @@ Puppet::Functions.create_function(:'deferlib::cmd_') do
   def cmd(options = {})
     default = []
     default = options['else'] if options.key?('else')
+    
     unless options.key?('command')
       return default
     end

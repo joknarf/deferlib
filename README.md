@@ -39,6 +39,12 @@ Example:
 service { 'cron':
   ensure => deferlib::unless_file('/etc/maintenance', 'running'),
 }
+
+# noop mode when maintenance preventing starting service during operation
+service { 'cron':
+  ensure => 'running',
+  noop   => deferlib::if_file('/etc/maintenance', true, false),
+}
 ```
 
 ## Usage
@@ -199,3 +205,6 @@ service { 'cron':
   }),  
 }
 ```
+## Reference
+
+[reference](REFERENCE.md)

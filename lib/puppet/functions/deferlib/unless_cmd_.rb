@@ -7,7 +7,7 @@
 # to be used on resource parameter value
 # Example:
 # service { 'cron':
-#    ensure => Deferred('unless_cmd', ['grep maintenance /tmp/status', 'running',{
+#    ensure => Deferred('deferlib::unless_cmd_', ['grep maintenance /tmp/status', 'running',{
 #          'else'  => 'stopped'
 #          'user'  => 'foo',
 #          'group' => 'bar',
