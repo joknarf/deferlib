@@ -4,10 +4,14 @@
 
 1. [Description](#description)
 1. [Setup - The basics of getting started with deferlib](#setup)
-    * [What deferlib affects](#what-deferlib-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with deferlib](#beginning-with-deferlib)
-1. [Usage - Configuration options and additional functionality](#usage)
+1. [Usage](#usage)
+    * [onlyif_file()](#onlyif_file)
+    * [unless_file()](#unless_file)
+    * [onlyif_cmd()](#onlyif_cmd)
+    * [unless_cmd()](#unless_cmd)
+    * [agent_exec()](#agent_exec)
 
 ## Description
 
@@ -42,35 +46,60 @@ service { 'cron':
 
 functions available:
 
-* onlyif_file()
+### onlyif_file()
 ```ruby
 onlyif_file(file, value, [default])
 ```
-parameters:
+#### Description:
+returns `value` if `file` exits else returns `default` (default: [])
+
+#### Parameters:
 ```
 file    : path to file to check existence
 value   : value returned if file exists
 default : value returned if file does not exist (default [])
 ```
 
-* unless_file()
+#### Example:
+```puppet
+# stop cron when cron_stop flag file exists
+# => function to read: if file /etc/cron_stop exists ensure stopped else ensure running
+service { 'cron':
+  ensure => Deffered('onlyif_file', ['/etc/cron_stop', 'stopped', 'running']),
+}
+```
+
+### unless_file()
 ```ruby
 unless_file(file, value, [default])
 ```
-parameters:
+#### Description:
+returns `value` if `file` does not exits else returns `default` (default: [])
+
+#### Parameters:
 ```
 file    : path to file to check existence
 value   : value returned if file does not exist
 default : value returned if file exists (default [])
 ```
 
-* onlyif_cmd()
+#### Example:
+```puppet
+# do not restart cron when maintenance flag file exists putting ensure to undef ([])
+# => function to read: unless file /etc/maintenance exists ensure running, (else ensure undef)
+service { 'cron':
+  ensure => Deffered('unless_file', ['/etc/maintenance', 'running']),
+}
+```
+
+### onlyif_cmd()
 ```ruby
 onlyif_cmd(cmd, value, [<options>])
-Description:
-returns `value` if exit code of `cmd` is 0 else returns `options['else']` (default to [])
 ```
-Parameters:
+#### Description:
+returns `value` if exit code of `cmd` is 0 else returns `options['else']` (default to [])
+
+#### Parameters:
 ```
 cmd     : shell code to execute
 value   : value returned if exit status is 0
@@ -85,11 +114,26 @@ options['environment'] : {
   ...
 }
 ```
-* unless_cmd()
+
+#### Example:
+```puppet
+# ensure cron running if isproduction returns 0
+service { 'cron':
+  ensure => Deferred('onlyif_cmd',['/bin/isproduction', 'running', {
+          'user'    => 'foo',
+          'group'   => 'bar',
+  }]),
+}
+```
+
+### unless_cmd()
 ```ruby
 unless_cmd(cmd, value, [<options>])
 ```
-parameters:
+#### Description:
+returns `value` if exit code of `cmd` is not 0 else returns `options['else']` (default to [])
+
+#### Parameters:
 ```
 cmd     : shell code to execute
 value   : value returned if exit status is not 0
@@ -106,11 +150,25 @@ options['environment'] : {
 }
 ```
 
-* agent_exec()
+#### Example:
+```puppet
+# ensure cron running unless ismaintenance returns 0
+service { 'cron':
+  ensure => Deferred('unless_cmd',['/bin/ismaintenance', 'running', {
+          'user'    => 'foo',
+          'group'   => 'bar',
+  }]),
+}
+```
+
+### agent_exec()
 ```ruby
 agent_exec(options)
 ```
-parameters:
+#### Description:
+returns output of `options[command]` if exit code is 0 else returns `options['else']` (default to [])
+
+#### parameters:
 ```
 options : Hash with parameters
 options : {
@@ -119,21 +177,15 @@ options : {
   'user'        => # The user to run the command as	
   'group'       => # The group to run the command as
   'environment' => # A Hash of environment variables
-})
+}
 options['environment'] : {
   '<variable name>' => # value of the environement variable
   ...
 }
 ```
 
-Examples:
-```
-# do not restart cron when maintance flag file exists putting noop to true
-service { 'cron':
-  ensure => 'running',
-  noop   => Deffered('unless_file',['/etc/maintenance', false, true]),
-}
-
+#### Example:
+```puppet
 # force ensure from local file content if exists, else ensure running
 service { 'cron':
   ensure => Deferred('agent_exec',[{
@@ -142,4 +194,3 @@ service { 'cron':
   }]),
 }
 ```
-
