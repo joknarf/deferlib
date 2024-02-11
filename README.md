@@ -193,4 +193,10 @@ service { 'cron':
           'else'    => 'running'
   }]),
 }
+# use script cron_ensure from puppet module files
+service { 'cron':
+  ensure => Deferred('agent_exec',[{
+          'command' => file("${module_name}/cron_ensure"),
+  }]),  
+}
 ```
