@@ -1,7 +1,7 @@
 #
 # returns <command> output
-# if <command> output is empty returns <default>
-# if <default> not passed, <default> is []
+# if <command> exit code <> 0 returns <else>
+# <else> default is []
 # to be called as Deferred type to be run on client
 # to be used on resource parameter value
 #
@@ -9,7 +9,7 @@
 # service { 'cron':
 #   ensure => Deferred('agent_exec', [{
 #         command     => 'cat /etc/cron_local_ensure',
-#         default     => 'running',
+#         else        => 'running',
 #         user        => 'foo',
 #         environment => {'PATH' => '/bin:/usr/bin'},
 #   }]),
@@ -22,7 +22,7 @@ Puppet::Functions.create_function(:agent_exec) do
 
   def agent_exec(options = {})
     default = []
-    default = options['default'] if options.key?('default')
+    default = options['else'] if options.key?('else')
     unless options.key?('command')
       return default
     end
@@ -33,7 +33,7 @@ Puppet::Functions.create_function(:agent_exec) do
     opts[:environment] = options['environment'] if options.key?('environment')
     result = Puppet::Util::Execution.execute(cmd, opts)
     out = result.to_s.chomp
-    if out == '' or result.exitstatus != 0
+    if result.exitstatus != 0
       default
     else
       out
