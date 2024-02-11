@@ -15,7 +15,7 @@
 #    }]),
 # }
 #
-Puppet::Functions.create_function(:'deferlib::unless_cmd') do
+Puppet::Functions.create_function(:'deferlib::unless_cmd_') do
   dispatch :unless_cmd do
     param 'String', :cmd
     param 'Any', :value

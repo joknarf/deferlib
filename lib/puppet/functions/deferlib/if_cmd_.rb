@@ -15,7 +15,7 @@
 #    }]),
 # }
 #
-Puppet::Functions.create_function(:'deferlib::if_cmd') do
+Puppet::Functions.create_function(:'deferlib::if_cmd_') do
   dispatch :if_cmd do
     param 'String', :cmd
     param 'Any', :value

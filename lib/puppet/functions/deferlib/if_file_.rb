@@ -6,16 +6,16 @@
 #
 # Example:
 # service { 'cron':
-#    ensure => Deferred('def_if_file', ['/etc/production', 'running']),
+#    ensure => Deferred('if_file', ['/etc/production', 'running']),
 # }
 #
-Puppet::Functions.create_function(:def_if_file) do
-  dispatch :def_if_file do
+Puppet::Functions.create_function(:'deferlib::if_file_') do
+  dispatch :if_file do
     param 'String', :file
     param 'Any', :value
     optional_param 'Any', :default
   end
-  def def_if_file(file, value, default = [])
+  def if_file(file, value, default = [])
     if File.exist?(file)
       value
     else
