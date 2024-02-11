@@ -1,5 +1,5 @@
 function deferlib::cmd (
-  $options,
+  Hash $options,
 ) {
   Deferred('deferlib::cmd_', [$options])
 }

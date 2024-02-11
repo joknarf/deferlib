@@ -1,7 +1,7 @@
 function deferlib::if_cmd (
-  $cmd,
-  $value,
-  $options = {},
+  String         $cmd,
+  Any            $value,
+  Optional[Hash] $options = {},
 ) {
   Deferred('deferlib::if_cmd_', [$cmd, $value, $options])
 }

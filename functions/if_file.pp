@@ -1,7 +1,7 @@
 function deferlib::if_file (
-  $file,
-  $value,
-  $default = undef,
+  String $file,
+  Any    $value,
+  Any    $default = undef,
 ) {
   Deferred('deferlib::if_file_', [$file, $value, $default])
 }
