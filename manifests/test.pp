@@ -43,9 +43,14 @@ class deferlib::test {
   exec { 'env var deferred':
     command     => 'echo "$myvar"',
     provider    => 'shell',
-    environment => [ Deferred('def_cmd',[{
-              'command' => 'echo "myvar=$(cat /tmp/msg)"'
-    }]) ],
+    environment => [Deferred('def_cmd', [{
+            'command' => 'echo "myvar=$(cat /tmp/msg)"'
+    }])],
     logoutput   => true,
+  }
+
+  $def_val = Deferred('def_cmd', [{ 'command' => 'cat /tmp/msg' }])
+  notify { 'test string':
+    message => Deferred('sprintf', ['myvar=%s', $def_val]),
   }
 }
