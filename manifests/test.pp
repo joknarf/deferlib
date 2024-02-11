@@ -8,22 +8,22 @@
 class deferlib::test {
   notify { 'deferred':
     message => deferlib::cmd({
-          'command'     => 'cat /tmp/message;id',
-          'else'        => 'no message',
-          'user'        => 'joknarf',
-          'environment' => { 'PATH' => '/bin:/sbin' },
+        'command'     => 'cat /tmp/message;id',
+        'else'        => 'no message',
+        'user'        => 'joknarf',
+        'environment' => { 'PATH' => '/bin:/sbin' },
     }),
   }
 
   notify { 'script from module':
     message => deferlib::cmd({
-          'command' => file("${module_name}/myscript"),
+        'command' => file("${module_name}/myscript"),
     }),
   }
 
   notify { 'deferlib::cmd':
     message => deferlib::cmd ({
-          'command' => file("${module_name}/myscript"),
+        'command' => file("${module_name}/myscript"),
     }),
   }
 
@@ -44,7 +44,7 @@ class deferlib::test {
     command     => 'echo "$myvar"',
     provider    => 'shell',
     environment => [deferlib::cmd({
-            'command' => 'echo "myvar=$(cat /tmp/msg)"'
+          'command' => 'echo "myvar=$(cat /tmp/msg)"',
     })],
     logoutput   => true,
   }
@@ -54,7 +54,6 @@ class deferlib::test {
     message => Deferred('sprintf', ['myvar=%s', $def_val]),
   }
   notify { 'check':
-    message => deferlib::if_file('/tmp/ok', 'file found', 'file not found')
+    message => deferlib::if_file('/tmp/ok', 'file found', 'file not found'),
   }
- 
 }
