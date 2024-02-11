@@ -94,10 +94,10 @@ service { 'cron':
 
 ### onlyif_cmd()
 ```ruby
-onlyif_cmd(cmd, value, [<options>])
+onlyif_cmd(cmd, value, [options])
 ```
 #### Description:
-returns `value` if exit code of `cmd` is 0 else returns `options['else']` (default to [])
+returns `value` if exit code of `cmd` is 0 else returns `options[else]` (default to [])
 
 #### Parameters:
 ```
@@ -128,10 +128,10 @@ service { 'cron':
 
 ### unless_cmd()
 ```ruby
-unless_cmd(cmd, value, [<options>])
+unless_cmd(cmd, value, [options])
 ```
 #### Description:
-returns `value` if exit code of `cmd` is not 0 else returns `options['else']` (default to [])
+returns `value` if exit code of `cmd` is not 0 else returns `options[else]` (default to [])
 
 #### Parameters:
 ```
