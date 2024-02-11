@@ -29,11 +29,11 @@ or options[else] if commmand exit code not 0
 ```puppet
 service { 'cron':
   ensure => deferlib::cmd({
-    command     => 'cat /etc/cron_ensure',
-    else        => 'running',
-    user        => 'foo',
-    group       => 'bar',
-    environment => { 'myvar' => 'myvalue' },
+    'command'     => 'cat /etc/cron_ensure',
+    'else'        => 'running',
+    'user'        => 'foo',
+    'group'       => 'bar',
+    'environment' => { 'myvar' => 'myvalue' },
   }),
 }
 ```
@@ -51,11 +51,11 @@ Returns: `Any` output of command or options[else]
 ```puppet
 service { 'cron':
   ensure => deferlib::cmd({
-    command     => 'cat /etc/cron_ensure',
-    else        => 'running',
-    user        => 'foo',
-    group       => 'bar',
-    environment => { 'myvar' => 'myvalue' },
+    'command'     => 'cat /etc/cron_ensure',
+    'else'        => 'running',
+    'user'        => 'foo',
+    'group'       => 'bar',
+    'environment' => { 'myvar' => 'myvalue' },
   }),
 }
 ```
@@ -68,11 +68,11 @@ options of shell execution
 
 Options:
 
-* **:command** `String`: shell command to execute
-* **:else** `Any`: returned value if command exit code not 0
-* **:user** `Variant[String,Integer]`: The user to run the command as
-* **:group** `Variant[String,Integer]`: The group to run the command as
-* **:environment** `Hash`: Hash of environment variable names / variable values
+* **'command'** `String`: shell command to execute
+* **'else'** `Any`: returned value if command exit code not 0
+* **'user'** `Variant[String,Integer]`: The user to run the command as
+* **'group'** `Variant[String,Integer]`: The group to run the command as
+* **'environment'** `Hash`: Hash of environment variable names / variable values
 
 ### <a name="deferlib--if_cmd"></a>`deferlib::if_cmd`
 
@@ -87,10 +87,10 @@ returns value if deferred shell command execution exit code 0 else returns optio
 ```puppet
 service { 'cron':
   ensure => deferlib::if_cmd('/bin/ismaintenance', 'stopped', {
-    else        => 'running',
-    user        => 'foo',
-    group       => 'bar',
-    environment => { 'myvar' => 'myvalue' },
+    'else'        => 'running',
+    'user'        => 'foo',
+    'group'       => 'bar',
+    'environment' => { 'myvar' => 'myvalue' },
   }),
 }
 ```
@@ -108,10 +108,10 @@ Returns: `Any` value or options[else]
 ```puppet
 service { 'cron':
   ensure => deferlib::if_cmd('/bin/ismaintenance', 'stopped', {
-    else        => 'running',
-    user        => 'foo',
-    group       => 'bar',
-    environment => { 'myvar' => 'myvalue' },
+    'else'        => 'running',
+    'user'        => 'foo',
+    'group'       => 'bar',
+    'environment' => { 'myvar' => 'myvalue' },
   }),
 }
 ```
@@ -136,10 +136,10 @@ shell execution options
 
 Options:
 
-* **:else** `Any`: returned value if command exit code not 0, default []
-* **:user** `Variant[String,Integer]`: The user to run the command as
-* **:group** `Variant[String,Integer]`: The group to run the command as
-* **:environment** `Hash`: Hash of environment variable names / variable values
+* **'else'** `Any`: returned value if command exit code not 0, default []
+* **'user'** `Variant[String,Integer]`: The user to run the command as
+* **'group'** `Variant[String,Integer]`: The group to run the command as
+* **'environment'** `Hash`: Hash of environment variable names / variable values
 
 ### <a name="deferlib--if_file"></a>`deferlib::if_file`
 
@@ -243,10 +243,10 @@ shell execution options
 
 Options:
 
-* **:else** `Any`: returned value if command exit code is 0, default []
-* **:user** `Variant[String,Integer]`: The user to run the command as
-* **:group** `Variant[String,Integer]`: The group to run the command as
-* **:environment** `Hash`: Hash of environment variable names / variable values
+* **'else'** `Any`: returned value if command exit code is 0, default []
+* **'user'** `Variant[String,Integer]`: The user to run the command as
+* **'group'** `Variant[String,Integer]`: The group to run the command as
+* **'environment'** `Hash`: Hash of environment variable names / variable values
 
 ### <a name="deferlib--unless_file"></a>`deferlib::unless_file`
 

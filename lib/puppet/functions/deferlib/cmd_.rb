@@ -8,10 +8,10 @@
 # Example:
 # service { 'cron':
 #   ensure => Deferred('deferlib::cmd_', [{
-#         command     => 'cat /etc/cron_local_ensure',
-#         else        => 'running',
-#         user        => 'foo',
-#         environment => {'PATH' => '/bin:/usr/bin'},
+#         'command'     => 'cat /etc/cron_local_ensure',
+#         'else'        => 'running',
+#         'user'        => 'foo',
+#         'environment' => {'PATH' => '/bin:/usr/bin'},
 #   }]),
 # }
 #

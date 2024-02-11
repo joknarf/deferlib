@@ -7,13 +7,13 @@
 #      value to return if command exit code is not 0
 # @param options
 #      shell execution options
-# @option options [Any] :else
+# @option options [Any] 'else'
 #      returned value if command exit code is 0, default []
-# @option options [Variant[String,Integer]] :user
+# @option options [Variant[String,Integer]] 'user'
 #      The user to run the command as
-# @option options [Variant[String,Integer]] :group
+# @option options [Variant[String,Integer]] 'group'
 #      The group to run the command as
-# @option options [Hash] :environment
+# @option options [Hash] 'environment'
 #      Hash of environment variable names / variable values
 # @return [Any]
 #      value or options[else]
