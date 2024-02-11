@@ -16,9 +16,12 @@ class deferlib::test {
   }
 
   notify { 'script from module':
+    message => Deferred('def_cmd', [{
+          'command' => file("${module_name}/myscript"),
+    }]),
   }
 
-  notify {'deferlib:cmd':
+  notify { 'deferlib:cmd':
     message => Deferred('deferlib::cmd', [{
           'command' => file("${module_name}/myscript"),
     }]),
