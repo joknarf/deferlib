@@ -39,4 +39,13 @@ class deferlib::test {
     noop   => Deferred('deferlib::if_file', ['/tmp/flag', true, false]),
     #noop   => Deferred('deferlib::unless_file', ['/tmp/flag', false, true]),
   }
+  # use deferred command output in env variable
+  exec { 'env var deferred':
+    command     => 'echo "$myvar"',
+    provider    => 'shell',
+    environment => [ Deferred('def_cmd',[{
+              'command' => 'echo "myvar=$(cat /tmp/msg)"'
+    }]) ],
+    logoutput   => true,
+  }
 }
