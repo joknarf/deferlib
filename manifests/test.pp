@@ -16,7 +16,10 @@ class deferlib::test {
   }
 
   notify { 'script from module':
-    message => Deferred('def_exec', [{
+  }
+
+  notify {'deferlib:cmd':
+    message => Deferred('deferlib::cmd', [{
           'command' => file("${module_name}/myscript"),
     }]),
   }
@@ -30,6 +33,6 @@ class deferlib::test {
     #         else    => 'running',
     #}]),
     ensure => 'running',
-    noop   => Deferred('def_unless_file', ['/tmp/flag', false, true]),
+    noop   => Deferred('deferlib::unless_file', ['/tmp/flag', false, true]),
   }
 }
