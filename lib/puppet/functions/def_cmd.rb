@@ -7,7 +7,7 @@
 #
 # Example:
 # service { 'cron':
-#   ensure => Deferred('def_exec', [{
+#   ensure => Deferred('def_cmd', [{
 #         command     => 'cat /etc/cron_local_ensure',
 #         else        => 'running',
 #         user        => 'foo',
@@ -15,12 +15,12 @@
 #   }]),
 # }
 #
-Puppet::Functions.create_function(:def_exec) do
-  dispatch :def_exec do
+Puppet::Functions.create_function(:def_cmd) do
+  dispatch :def_cmd do
     param 'Hash', :options
   end
 
-  def def_exec(options = {})
+  def def_cmd(options = {})
     default = []
     default = options['else'] if options.key?('else')
     unless options.key?('command')

@@ -11,7 +11,7 @@
     * [def_unless_file()](#def_unless_file)
     * [def_if_cmd()](#def_if_cmd)
     * [def_unless_cmd()](#def_unless_cmd)
-    * [def_exec()](#def_exec)
+    * [def_cmd()](#def_cmd)
 
 ## Description
 
@@ -161,9 +161,9 @@ service { 'cron':
 }
 ```
 
-### def_exec()
+### def_cmd()
 ```ruby
-def_exec(options)
+def_cmd(options)
 ```
 #### Description:
 returns output of `options[command]` if exit code is 0 else returns `options['else']` (default to [])
@@ -188,14 +188,14 @@ options['environment'] : {
 ```puppet
 # force ensure from local file content if exists, else ensure running
 service { 'cron':
-  ensure => Deferred('def_exec',[{
+  ensure => Deferred('def_cmd',[{
           'command' => 'cat /etc/cron_ensure',
           'else'    => 'running',
   }]),
 }
 # use script cron_ensure from puppet module files
 service { 'cron':
-  ensure => Deferred('def_exec',[{
+  ensure => Deferred('def_cmd',[{
           'command' => file("${module_name}/cron_ensure"),
   }]),  
 }
