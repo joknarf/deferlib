@@ -12,6 +12,7 @@
     * [deferlib::if_cmd()](#deferlibif_cmd)
     * [deferlib::unless_cmd()](#deferlibunless_cmd)
     * [deferlib::cmd()](#deferlibcmd)
+1. [Reference](REFERENCE.md)
 
 ## Description
 
@@ -207,4 +208,4 @@ service { 'cron':
 ```
 ## Reference
 
-[reference](REFERENCE.md)
+[Reference](REFERENCE.md)
