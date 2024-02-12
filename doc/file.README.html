@@ -256,6 +256,7 @@ service { &#39;cron&#39;:
 <pre class="code ruby"><code class="ruby">options : Hash with parameters
 options : {
   &#39;command&#39;     =&gt; # Shell code to execute
+  &#39;match&#39;       =&gt; # regexp to validate ouput (returns default if not)
   &#39;else&#39;        =&gt; # value returned if exit code is not 0
   &#39;user&#39;        =&gt; # The user to run the command as	
   &#39;group&#39;       =&gt; # The group to run the command as
