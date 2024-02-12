@@ -9,6 +9,7 @@
 # service { 'cron':
 #   ensure => Deferred('deferlib::cmd_', [{
 #         'command'     => 'cat /etc/cron_local_ensure',
+#         'match'       => '^(running|stopped)$',
 #         'else'        => 'running',
 #         'user'        => 'foo',
 #         'environment' => {'PATH' => '/bin:/usr/bin'},
@@ -34,9 +35,14 @@ Puppet::Functions.create_function(:'deferlib::cmd_') do
     result = Puppet::Util::Execution.execute(command, opts)
     out = result.to_s.chomp
     if result.exitstatus != 0
-      default
-    else
-      out
+      return default
     end
+    if options.key?('match')
+      if options['match'].match(out)
+        return out
+      end
+      return default
+    end
+    out
   end
 end

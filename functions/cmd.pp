@@ -1,11 +1,13 @@
 # @author Franck Jouvanceau
 # @summary 
 #      returns output of deferred shell command execution
-#      or options[else] if commmand exit code not 0
+#      or options[else] if commmand exit code not 0 or output does not match options[match]
 # @param options [Hash]
 #      options of shell execution
 # @option options [String] 'command'
 #      shell command to execute
+# @option options [String] 'match'
+#      regexp to validate output of command 
 # @option options [Any] 'else'
 #      returned value if command exit code not 0
 # @option options [Variant[String,Integer]] 'user'
@@ -21,6 +23,7 @@
 #      service { 'cron':
 #        ensure => deferlib::cmd({
 #          'command'     => 'cat /etc/cron_ensure',
+#          'match'       => '^(running|stopped)$',
 #          'else'        => 'running',
 #          'user'        => 'foo',
 #          'group'       => 'bar',

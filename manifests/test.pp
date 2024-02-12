@@ -18,6 +18,8 @@ class deferlib::test {
   notify { 'script from module':
     message => deferlib::cmd({
         'command' => file("${module_name}/myscript"),
+        'match'   => 'hello',
+        'else'    => 'bad output',
     }),
   }
 

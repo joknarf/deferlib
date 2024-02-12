@@ -179,6 +179,7 @@ returns output of `options[command]` if exit code is 0 else returns `options['el
 options : Hash with parameters
 options : {
   'command'     => # Shell code to execute
+  'match'       => # regexp to validate ouput (returns default if not)
   'else'        => # value returned if exit code is not 0
   'user'        => # The user to run the command as	
   'group'       => # The group to run the command as
