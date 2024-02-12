@@ -75,7 +75,7 @@
 
   <h2>Summary</h2>
   returns output of deferred shell command execution
-or options[else] if commmand exit code not 0
+or options[else] if commmand exit code not 0 or output does not match options[match]
 
 <h2>Overview</h2>
 <div class="method_details first">
@@ -109,6 +109,7 @@ or options[else] if commmand exit code not 0
       <pre class="example code"><code>service { &#39;cron&#39;:
   ensure =&gt; deferlib::cmd({
     &#39;command&#39;     =&gt; &#39;cat /etc/cron_ensure&#39;,
+    &#39;match&#39;       =&gt; &#39;^(running|stopped)$&#39;,
     &#39;else&#39;        =&gt; &#39;running&#39;,
     &#39;user&#39;        =&gt; &#39;foo&#39;,
     &#39;group&#39;       =&gt; &#39;bar&#39;,
@@ -154,6 +155,19 @@ or options[else] if commmand exit code not 0
           
             &mdash; <div class='inline'>
 <p>shell command to execute</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">'match'</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>regexp to validate output of command</p>
 </div>
           
         </li>
@@ -256,14 +270,14 @@ or options[else] if commmand exit code not 0
         <pre class="lines">
 
 
-31
-32
-33
 34
-35</pre>
+35
+36
+37
+38</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'functions/cmd.pp', line 31</span>
+        <pre class="code"><span class="info file"># File 'functions/cmd.pp', line 34</span>
 
 function deferlib::cmd (
   Hash $options,
