@@ -1,11 +1,14 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-## Release 0.1.0
+## Release 2.0.2
 
 **Features**
+add puppet forge badges
 
+## Release 2.0.1
+
+**Features**
+add options[match] to deferlib::cmd to validate command output
 **Bugfixes**
 
 **Known Issues**
