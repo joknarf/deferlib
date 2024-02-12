@@ -8,6 +8,8 @@
 # @param default
 #      value to return if file does not exist (default: [])
 #
+# @return [Any]
+#
 # @example ensure service cron is stopped if file /etc/maintenance exists, else ensure running
 #      service { 'cron':
 #        ensure => deferlib::if_file('/etc/maintenance', 'stopped', 'running')
