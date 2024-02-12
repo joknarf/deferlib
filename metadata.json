@@ -6,6 +6,7 @@
   "license": "MIT",
   "source": "https://github.com/joknarf/deferlib",
   "project_page": "https://joknarf.github.io/deferlib",
+  "issues_url": "https://github.com/joknarf/deferlib/issues",
   "dependencies": [
 
   ],

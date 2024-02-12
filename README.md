@@ -1,3 +1,7 @@
+ [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+ [![Puppet Forge](https://img.shields.io/puppetforge/v/joknarf/deferlib.svg)](https://forge.puppetlabs.com/joknarf/deferlib)
+[![Puppet Forge Downloads](https://img.shields.io/puppetforge/dt/joknarf/deferlib.svg)](https://forge.puppetlabs.com/joknarf/deferlib)
+
 # deferlib
 
 ## Table of Contents
