@@ -61,7 +61,7 @@ functions available:
 deferlib::if_file(file, value, [default])
 ```
 #### Description:
-returns `value` if `file` exits else returns `default` (default: [])
+returns `value` if `file` exists else returns `default` (default: [])
 
 #### Parameters:
 ```
@@ -84,7 +84,7 @@ service { 'cron':
 deferlib::unless_file(file, value, [default])
 ```
 #### Description:
-returns `value` if `file` does not exits else returns `default` (default: [])
+returns `value` if `file` does not exist else returns `default` (default: [])
 
 #### Parameters:
 ```
