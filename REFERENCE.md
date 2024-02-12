@@ -7,7 +7,7 @@
 ### Functions
 
 * [`deferlib::cmd`](#deferlib--cmd): returns output of deferred shell command execution
-or options[else] if commmand exit code not 0
+or options[else] if commmand exit code not 0 or output does not match options[match]
 * [`deferlib::if_cmd`](#deferlib--if_cmd): returns value if deferred shell command execution exit code 0 else returns options[else]
 * [`deferlib::if_file`](#deferlib--if_file): returns value if file exists else returns default
 * [`deferlib::unless_cmd`](#deferlib--unless_cmd): returns value if deferred shell command execution exit code not 0 else returns options[else]
@@ -20,7 +20,7 @@ or options[else] if commmand exit code not 0
 Type: Puppet Language
 
 returns output of deferred shell command execution
-or options[else] if commmand exit code not 0
+or options[else] if commmand exit code not 0 or output does not match options[match]
 
 #### Examples
 
@@ -30,6 +30,7 @@ or options[else] if commmand exit code not 0
 service { 'cron':
   ensure => deferlib::cmd({
     'command'     => 'cat /etc/cron_ensure',
+    'match'       => '^(running|stopped)$',
     'else'        => 'running',
     'user'        => 'foo',
     'group'       => 'bar',
@@ -52,6 +53,7 @@ Returns: `Any` output of command or options[else]
 service { 'cron':
   ensure => deferlib::cmd({
     'command'     => 'cat /etc/cron_ensure',
+    'match'       => '^(running|stopped)$',
     'else'        => 'running',
     'user'        => 'foo',
     'group'       => 'bar',
@@ -69,6 +71,7 @@ options of shell execution
 Options:
 
 * **'command'** `String`: shell command to execute
+* **'match'** `String`: regexp to validate output of command
 * **'else'** `Any`: returned value if command exit code not 0
 * **'user'** `Variant[String,Integer]`: The user to run the command as
 * **'group'** `Variant[String,Integer]`: The group to run the command as
