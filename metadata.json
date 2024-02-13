@@ -1,6 +1,6 @@
 {
   "name": "joknarf-deferlib",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Franck Jouvanceau",
   "summary": "Deferred function library",
   "license": "MIT",

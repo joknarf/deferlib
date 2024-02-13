@@ -1,5 +1,15 @@
 # Changelog
 
+## Release 2.0.4
+
+**Bugfixes**
+deferlib::cmd() : fix options[match] regexp check
+
+## Release 2.0.3
+
+**Features**
+Fix doc docstring
+
 ## Release 2.0.2
 
 **Features**
