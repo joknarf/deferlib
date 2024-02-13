@@ -142,7 +142,7 @@ default : value returned if file does not exist (default [])
 <pre class="code ruby"><code class="ruby"># stop cron when cron_stop flag file exists
 # =&gt; function to read: if file /etc/cron_stop exists ensure stopped else ensure running
 service { &#39;cron&#39;:
-  ensure =&gt; deferlib::if_file(/etc/cron_stop&#39;, &#39;stopped&#39;, &#39;running&#39;),
+  ensure =&gt; deferlib::if_file(&#39;/etc/cron_stop&#39;, &#39;stopped&#39;, &#39;running&#39;),
 }
 </code></pre>
 
@@ -274,7 +274,7 @@ options[&#39;environment&#39;] : {
 
 <pre class="code ruby"><code class="ruby"># force ensure from local file content if exists, else ensure running
 service { &#39;cron&#39;:
-  ensure =&gt; deferlib::cmd&#39;({
+  ensure =&gt; deferlib::cmd({
           &#39;command&#39; =&gt; &#39;cat /etc/cron_ensure&#39;,
           &#39;else&#39;    =&gt; &#39;running&#39;,
   }),
