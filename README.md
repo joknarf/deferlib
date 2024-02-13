@@ -187,7 +187,7 @@ options : {
   'else'        => # value returned if exit code is not 0
   'user'        => # The user to run the command as	
   'group'       => # The group to run the command as
-  'environment' => # A Hash of environment variables
+  'environment' => # A Hash of environment variables/values
 }
 options['environment'] : {
   '<variable name>' => # value of the environement variable
