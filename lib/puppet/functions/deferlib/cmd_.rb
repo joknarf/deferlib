@@ -38,7 +38,7 @@ Puppet::Functions.create_function(:'deferlib::cmd_') do
       return default
     end
     if options.key?('match')
-      if options['match'].match(out)
+      if out.match(options['match'])
         return out
       end
       return default
